@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADENDOS/2025 AO PLANO DE GESTÃO QUADRIENAL E PPP (2022/2025)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .school-selector {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .school-selector:hover {
+            border-color: #3498db;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .school-selector label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .school-selector select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .school-selector select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: attr(data-number);
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-size: 1em;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-group input[readonly] {
+            background-color: #f0f2f5;
+            cursor: not-allowed;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .subsection {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid #3498db;
+        }
+
+        .subsection-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                margin: 0;
+                border-radius: 15px;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .form-container {
+                padding: 20px;
+            }
+            .section {
+                padding: 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .modal-header, .modal-footer {
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+        }
+        .modal-footer {
+            border-top: 1px solid #ddd;
+        }
+        .close-button {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover, .close-button:focus {
+            color: black;
+        }
+        #doc-output {
+            width: 100%;
+            min-height: 300px;
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Sistema Educacional de Bertioga</h1>
+            <p>ADENDOS/2025 AO PLANO DE GESTÃO QUADRIENAL E PPP (2022/2025)</p>
+        </div>
+
+        <div class="form-container">
+            <form id="pppForm">
+                <!-- Seletor de Escola -->
+                <div class="school-selector">
+                    <label for="escolaSelecionada">🏫 Selecione a Unidade Escolar:</label>
+                    <select id="escolaSelecionada" name="escolaSelecionada" required>
+                        <option value="">Selecione uma escola...</option>
+                    </select>
+                </div>
+
+                <!-- Seção 1: Identificação da Escola -->
+                <div class="section">
+                    <h2 class="section-title" data-number="1">Identificação da Escola</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nomeUE">1.1 Nome da U.E.:</label>
+                            <input type="text" id="nomeUE" name="nomeUE" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="codigoCIE">1.5 Código de identificação - CIE:</label>
+                            <input type="text" id="codigoCIE" name="codigoCIE" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nomeResponsavel">1.2 Nome do Diretor(a) / Assistente/Coordenador(a)/Professor responsável:</label>
+                        <input type="text" id="nomeResponsavel" name="nomeResponsavel" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="enderecoCompleto">1.3 Endereço completo da U.E.:</label>
+                        <input type="text" id="enderecoCompleto" name="enderecoCompleto" readonly>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefone">1.4 Telefone:</label>
+                            <input type="tel" id="telefone" name="telefone" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cursosePeriodos">1.6 Cursos e Períodos:</label>
+                        <textarea id="cursosePeriodos" name="cursosePeriodos" required></textarea>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">1.7 Horários:</div>
+                        
+                        <div class="form-group">
+                            <label for="funcionamentoEscola">1.7.1 Funcionamento da Escola:</label>
+                            <input type="text" id="funcionamentoEscola" name="funcionamentoEscola" placeholder="Ex: Segunda a Sexta, 07:00 às 17:00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horarioAtendimento">1.7.2 Horário preferencial de atendimento:</label>
+                            <input type="text" id="horarioAtendimento" name="horarioAtendimento" placeholder="Ex: 08:00 às 12:00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horarioLetivo">1.7.3 Horário letivo:</label>
+                            <textarea id="horarioLetivo" name="horarioLetivo" placeholder="Descreva os horários letivos da escola" required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="periodoIntegral">Período integral (se houver):</label>
+                                <input type="text" id="periodoIntegral" name="periodoIntegral" placeholder="Ex: 07:00 às 17:00">
+                            </div>
+                            <div class="form-group">
+                                <label for="periodoParcial">Período parcial:</label>
+                                <input type="text" id="periodoParcial" name="periodoParcial" placeholder="Ex: Manhã: 07:00-12:00 / Tarde: 13:00-18:00" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">1.8 Situação legal</div>
+                        
+                        <div class="form-group">
+                            <label for="mantenedor">1.8.1 Mantenedor:</label>
+                            <input type="text" id="mantenedor" name="mantenedor" value="Prefeitura Municipal de Bertioga" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enderecoMantenedor">1.8.2 Endereço e telefone:</label>
+                            <textarea id="enderecoMantenedor" name="enderecoMantenedor" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="decretoCriacao">1.8.3 Decreto de criação: Portaria SE Nº</label>
+                            <input type="text" id="decretoCriacao" name="decretoCriacao" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formaOcupacao">1.9 Forma de ocupação do prédio:</label>
+                        <select id="formaOcupacao" name="formaOcupacao" required>
+                            <option value="">Selecione...</option>
+                            <option value="Próprio">Próprio</option>
+                            <option value="Aluguel">Aluguel</option>
+                            <option value="Cedido">Cedido</option>
+                        </select>
+                    </div>
+                </div>
+                
+                 <!-- All other sections -->
+                <div class="section">
+                    <h2 class="section-title" data-number="2">Estrutura Física</h2>
+                    <div class="form-group"><label for="croquiPlanta">2.1 Croqui e/ou planta do prédio (somente no caso de alterações):</label><textarea id="croquiPlanta" name="croquiPlanta" placeholder="Descreva alterações na planta/croqui ou indique 'Sem alterações'"></textarea></div>
+                    <div class="form-group"><label for="certificados">2.2 Certificados (desinsetização/desratização/limpeza de caixa d'água, filtro, etc.):</label><textarea id="certificados" name="certificados" placeholder="Liste os certificados e suas validades" required></textarea></div>
+                    <div class="form-group"><label for="validadeExtintores">2.3 Data de validade dos extintores disponíveis na U.E.:</label><input type="text" id="validadeExtintores" name="validadeExtintores" placeholder="Ex: Extintor 1: 12/2025, Extintor 2: 06/2026" required></div>
+                </div>
+                <div class="section">
+                    <h2 class="section-title" data-number="3">Estrutura Organizacional</h2>
+                    <div class="form-group"><label for="corpoTecnico">3.1 Corpo Técnico Administrativo (incluir A.A.E. - Agente de Apoio Escolar):</label><textarea id="corpoTecnico" name="corpoTecnico" placeholder="Liste todos os funcionários técnico-administrativos com suas funções" required></textarea></div>
+                    <div class="form-group"><label for="corpoDocente">3.2 Corpo Docente (especificar a Área de Formação e cursos de LIBRAS, Braile, Educação Especial, outros):</label><textarea id="corpoDocente" name="corpoDocente" placeholder="Liste todos os docentes com suas formações e especializações" required></textarea></div>
+                    <div class="form-group"><label for="horarioDocente">3.3 Horário Docente (prof. A.E.E., Arte, Ed. Física):</label><textarea id="horarioDocente" name="horarioDocente" placeholder="Descreva os horários dos docentes especializados" required></textarea></div>
+                    <div class="form-group"><label for="horarioTecnico">3.4 Horário Técnico Administrativo/Escala de férias 2025 (homologado):</label><textarea id="horarioTecnico" name="horarioTecnico" placeholder="Descreva horários e escala de férias homologada" required></textarea></div>
+                    <div class="form-group"><label for="calendarioEscolar">3.5 Calendário escolar 2025 (homologado):</label><textarea id="calendarioEscolar" name="calendarioEscolar" placeholder="Descreva o calendário escolar homologado para 2025" required></textarea></div>
+                    <div class="form-group"><label for="quadroClasses">3.6 Quadro de classes/salas e períodos:</label><textarea id="quadroClasses" name="quadroClasses" placeholder="Descreva a organização das classes por períodos" required></textarea></div>
+                    <div class="form-group"><label for="horarioHTP">3.7 Quadro de Horário de Trabalho Pedagógico - HTP:</label><textarea id="horarioHTP" name="horarioHTP" placeholder="Descreva os horários de HTP (se houver reunião presencial, incluir no quadro)" required></textarea></div>
+                    <div class="form-group"><label for="quadroCurricular">3.8 Quadro Curricular (Matriz Curricular atual):</label><textarea id="quadroCurricular" name="quadroCurricular" placeholder="Descreva a matriz curricular atual" required></textarea></div>
+                    <div class="form-group"><label for="horarioAulas">3.9 Quadro de horário das aulas:</label><textarea id="horarioAulas" name="horarioAulas" placeholder="Descreva os horários das aulas para Educação Infantil, Ensino Fundamental e EJA (se aplicável)" required></textarea></div>
+                </div>
+                <div class="section">
+                    <h2 class="section-title" data-number="4">Estrutura Pedagógica</h2>
+                    <div class="form-group"><label for="desempenhoMovimentacao">4.1 Quadro de Desempenho / Movimentação escolar do ano anterior:</label><textarea id="desempenhoMovimentacao" name="desempenhoMovimentacao" placeholder="Descreva o desempenho e movimentação escolar do ano anterior" required></textarea></div>
+                    <div class="form-group"><label for="buscaAtiva">4.2 Mecanismos de busca ativa realizados pela U.E.:</label><textarea id="buscaAtiva" name="buscaAtiva" placeholder="Descreva as estratégias de busca ativa utilizadas" required></textarea></div>
+                    <div class="form-group"><label for="resultadosEducacionais">4.3 Resultados educacionais internos e externos (Fluência leitora, SARESP, Prova Brasil, avaliações da S.E.):</label><textarea id="resultadosEducacionais" name="resultadosEducacionais" placeholder="Apresente os resultados das avaliações internas e externas" required></textarea></div>
+                </div>
+                <div class="section">
+                    <h2 class="section-title" data-number="5">Projeto Político Pedagógico - PPP</h2>
+                    <div class="form-group"><label for="caracterizacaoComunidade">5.1 Caracterização da Comunidade e contextualização histórica:</label><textarea id="caracterizacaoComunidade" name="caracterizacaoComunidade" placeholder="Descreva a caracterização e contextualização histórica da comunidade" required></textarea></div>
+                    <div class="form-group"><label for="planoAcao">5.2 Plano de ação:</label><textarea id="planoAcao" name="planoAcao" placeholder="Descreva o plano de ação da escola" required></textarea></div>
+                    <div class="form-group"><label for="diagnostico">5.3 Diagnóstico com base nos indicadores educacionais da escola:</label><textarea id="diagnostico" name="diagnostico" placeholder="Apresente o diagnóstico baseado nos indicadores educacionais" required></textarea></div>
+                    <div class="form-group"><label for="recuperacaoParalela">5.4 Recuperação paralela:</label><textarea id="recuperacaoParalela" name="recuperacaoParalela" placeholder="Descreva as estratégias de recuperação paralela" required></textarea></div>
+                    <div class="form-group"><label for="recomposicaoAprendizagem">5.5 Recomposição de aprendizagem (onde houver):</label><textarea id="recomposicaoAprendizagem" name="recomposicaoAprendizagem" placeholder="Descreva as estratégias de recomposição de aprendizagem"></textarea></div>
+                    <div class="form-group"><label for="projetosColetivos">5.6 Projetos coletivos desenvolvidos pela U.E.:</label><textarea id="projetosColetivos" name="projetosColetivos" placeholder="Descreva os projetos (justificativa, objetivos, habilidades/conteúdos, metodologia, desenvolvimento, cronograma e avaliação)" required></textarea></div>
+                    <div class="form-group"><label for="acoesAvaliacao">5.7 Ações a serem desenvolvidas com base na avaliação geral da escola:</label><textarea id="acoesAvaliacao" name="acoesAvaliacao" placeholder="Descreva as ações baseadas na avaliação geral da escola" required></textarea></div>
+                </div>
+                <div class="section">
+                    <h2 class="section-title" data-number="6">Formas de Atuação da Comunidade</h2>
+                    <div class="form-group"><label for="conselhoEscola">6.1 Conselho de escola / Ata de Constituição Atual (2025):</label><textarea id="conselhoEscola" name="conselhoEscola" placeholder="Descreva a composição do conselho de escola e informações da ata de constituição" required></textarea></div>
+                    <div class="form-group"><label for="apm">6.2 Associação de Pais e Mestres / Ata de Constituição atual dos membros:</label><textarea id="apm" name="apm" placeholder="Descreva a composição da APM e informações da ata de constituição dos membros" required></textarea></div>
+                </div>
+
+
+                <div class="actions">
+                    <button type="button" class="btn btn-secondary" onclick="salvarRascunho()">
+                        💾 Salvar Rascunho
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="visualizarFormulario()">
+                        👁️ Visualizar / Imprimir
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="exportarParaGoogleDocs()">
+                        📄 Exportar Google Docs
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal for Google Docs -->
+    <div id="docModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Conteúdo para Google Docs</h2>
+          <span class="close-button">&times;</span>
+        </div>
+        <p>Copie o texto abaixo e cole em um novo documento do Google Docs.</p>
+        <textarea id="doc-output" readonly></textarea>
+        <div class="modal-footer">
+          <button id="copy-btn" class="btn btn-primary">Copiar Texto</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    const schoolsData = [
+        { cod_escola: "01", cod_ue: "2501", nome_escola: "EM SEMENTES DO BEM", inep: "35010459", endereco: "Rua Jorge Mansour Costa, S/N, Bairro Indaiá", cep: "11260015", telefone: "13 33132759", cod_sed: "010459", dir_email: "dir.sementesdobem@seducbertioga.com.br", assist_email: "assist.sementesdobem@seducbertioga.com.br", coord_email: "coord.sementesdobem@seducbertioga.com.br", sec_email: "sec.sementesdobem@seducbertioga.com.br" },
+        { cod_escola: "02", cod_ue: "2502", nome_escola: "EM DR. DINO BUENO", inep: "35207020", endereco: "Rua José Rodrigues 15", cep: "11250126", telefone: "13 33171820", cod_sed: "207020", dir_email: "dir.dinobueno@seducbertioga.com.br", assist_email: "assist.dinobueno@seducbertioga.com.br", coord_email: "coord.emdinobueno@seducbertioga.com.br", sec_email: "sec.dinobueno@seducbertioga.com.br" },
+        { cod_escola: "03", cod_ue: "2503", nome_escola: "EM DR. JOSÉ ERMÍRIO DE MORAES FILHO", inep: "35201054", endereco: "Rua Victorio Guidolim, S/N, Bairro Indaiá", cep: "11260594", telefone: "13 33131213", cod_sed: "201054", dir_email: "dir.joseermirio@seducbertioga.com.br", assist_email: "assist.joseermirio@seducbertioga.com.br", coord_email: "coord.ermirio@seducbertioga.com.br", sec_email: "sec.ermirio@seducbertioga.com.br" },
+        { cod_escola: "04", cod_ue: "2504", nome_escola: "EM GENÉSIO SEBASTIÃO DOS SANTOS", inep: "35580636", endereco: "Rua Aprovada Seissentos E Dois,35", cep: "11259054", telefone: "13 3331 6379", cod_sed: "580636", dir_email: "dir.genesio@seducbertioga.com.br", assist_email: "assist.genesio@seducbertioga.com.br", coord_email: "coord.genesio@seducbertioga.com.br", sec_email: "sec.genesio@seducbertioga.com.br" },
+        { cod_escola: "05", cod_ue: "2505", nome_escola: "EM GIUSFREDO SANTINI", inep: "35207032", endereco: "Rua Epiphânio Baptista, 66", cep: "11250560", telefone: "13 33177015", cod_sed: "207032", dir_email: "dir.giusfredo@seducbertioga.com.br", assist_email: "assist.giusfredo@seducbertioga.com.br", coord_email: "coord.giusfredo@seducbertioga.com.br", sec_email: "sec.giusfredo@seducbertioga.com.br" },
+        { cod_escola: "06", cod_ue: "2506", nome_escola: "EM GOVERNADOR MÁRIO COVAS JÚNIOR", inep: "35021261", endereco: "Av. São Lourenço, 2160 - Riviera", cep: "11261594", telefone: "13 33166920", cod_sed: "021261", dir_email: "dir.mariocovas@seducbertioga.com.br", assist_email: "assist.mariocovas@seducbertioga.com.br", coord_email: "coord.mariocovas@seducbertioga.com.br", sec_email: "sec.mariocovas@seducbertioga.com.br" },
+        { cod_escola: "07", cod_ue: "2507", nome_escola: "EM HILDA STRENGER RIBEIRO", inep: "35207044", endereco: "Av. Anchieta, 8619", cep: "11258428", telefone: "13 33119601", cod_sed: "207044", dir_email: "dir.hildastrenger@seducbertioga.com.br", assist_email: "assist.hildastrenger@seducbertioga.com.br", coord_email: "coord.hildastrenger@seducbertioga.com.br", sec_email: "sec.hildastrenger@seducbertioga.com.br" },
+        { cod_escola: "08", cod_ue: "2508", nome_escola: "EM CAMINHOS DO BEM", inep: "35407264", endereco: "Rua Dr. Lincoln Bolivar Neves, 60 - Vista Linda", cep: "11259090", telefone: "13 33119977", cod_sed: "407264", dir_email: "dir.caminhosdobem@seducbertioga.com.br", assist_email: "assist.caminhosdobem@seducbertioga.com.br", coord_email: "coord.caminhosdobem@seducbertioga.com.br", sec_email: "sec.caminhosdobem@seducbertioga.com.br" },
+        { cod_escola: "09", cod_ue: "2509", nome_escola: "EM JOSÉ CARLOS BUZINARO", inep: "35653861", endereco: "Rua Aprovada 624 Quadra A - Nº 15 Costa Do Sol", cep: "11267474", telefone: "13 33126356", cod_sed: "653861", dir_email: "dir.buzinaro@seducbertioga.com.br", assist_email: "assist.buzinaro@seducbertioga.com.br", coord_email: "coord.buzinaro@seducbertioga.com.br", sec_email: "sec.buzinaro@seducbertioga.com.br" },
+        { cod_escola: "10", cod_ue: "2510", nome_escola: "EM JOSÉ DE OLIVEIRA SANTOS", inep: "35209557", endereco: "Rua Cardeal Emyle Biayenda, 248", cep: "11256070", telefone: "13 33171129", cod_sed: "209557", dir_email: "dir.josedeoliveira@seducbertioga.com.br", assist_email: "assist.josedeoliveira@seducbertioga.com.br", coord_email: "coord.josedeoliveira@seducbertioga.com.br", sec_email: "sec.josedeoliveira@seducbertioga.com.br" },
+        { cod_escola: "11", cod_ue: "2511", nome_escola: "EM PROF DELPHINO STOCKLER DE LIMA", inep: "35056285", endereco: "Rua Manoel Da Nobrega, S/N, Centro", cep: "11250288", telefone: "13 33173005", cod_sed: "056285", dir_email: "dir.delphino@seducbertioga.com.br", assist_email: "assist.delphino@seducbertioga.com.br", coord_email: "coord.delphino@seducbertioga.com.br", sec_email: "sec.delphino@seducbertioga.com.br" },
+        { cod_escola: "12", cod_ue: "2512", nome_escola: "EM PROF JOSÉ INÁCIO HORA", inep: "35224133", endereco: "Rua Rodrigues Alves, 759", cep: "11250432", telefone: "13 33173977", cod_sed: "224133", dir_email: "dir.inaciohora@seducbertioga.com.br", assist_email: "assist.inaciohora@seducbertioga.com.br", coord_email: "coord.inaciohora@seducbertioga.com.br", sec_email: "sec.inaciohora@seducbertioga.com.br" },
+        { cod_escola: "13", cod_ue: "2513", nome_escola: "EM PROFª CRISTINA DOS SANTOS", inep: "35023224", endereco: "Rua Pastor Djalma Da Silva Coimbra, S/N", cep: "11256230", telefone: "13 33177348", cod_sed: "023224", dir_email: "dir.cristinadossantos@seducbertioga.com.br", assist_email: "assist.cristinadossantos@seducbertioga.com.br", coord_email: "coord.cristinadossantos@seducbertioga.com.br", sec_email: "sec.cristinadossantos@seducbertioga.com.br" },
+        { cod_escola: "14", cod_ue: "2514", nome_escola: "EM PROFª MARIA LÚCIA SOARES MONTEIRO", inep: "35268773", endereco: "Rua Aprovada 612, 30", cep: "11259135", telefone: "13 33117016", cod_sed: "268773", dir_email: "dir.emmarialucia@seducbertioga.com.br", assist_email: "assit.emmarialucia@seducbertioga.com.br", coord_email: "coord.emmarialucia@seducbertioga.com.br", sec_email: "sec.emmarialucia@seducbertioga.com.br" },
+        { cod_escola: "15", cod_ue: "2515", nome_escola: "EM PROFª MIRIAM DE ASSIS", inep: "35653858", endereco: "Av. De São Lourenço, 2150 - Riviera De São Lourenço", cep: "11261594", telefone: "13 33167222", cod_sed: "653858", dir_email: "dir.emmiriamdeassis@seducbertioga.com.br", assist_email: "assist.emmiriamdeassis@seducbertioga.com.br", coord_email: "coord.emmiriamdeassis@seducbertioga.com.br", sec_email: "sec.emmiriamdeassis@seducbertioga.com.br" },
+        { cod_escola: "16", cod_ue: "2516", nome_escola: "EMEI JARDIM ALBATROZ", inep: "35120959", endereco: "Rua Jair Miranda De Souza, S/N - Albatroz", cep: "11250689", telefone: "13 33175610", cod_sed: "120959", dir_email: "dir.emeialbatroz@seducbertioga.com.br", assist_email: "assist.emeialbatroaz@seducbertioga.com.br", coord_email: "coord.emeijdalbatroz@seducbertioga.com.br", sec_email: "sec.emeialbatroz@seducbertioga.com.br" },
+        { cod_escola: "17", cod_ue: "2517", nome_escola: "EMEIF BORACÉIA", inep: "35207056", endereco: "Rua Prof. Geraldo Rodrigues Montemor, 295", cep: "11271165", telefone: "13 33121530", cod_sed: "207056", dir_email: "dir.boraceia@seducbertioga.com.br", assist_email: "assist.boraceia@seducbertioga.com.br", coord_email: "coord.boraceia@seducbertioga.com.br", sec_email: "sec.boraceia@seducbertioga.com.br" },
+        { cod_escola: "18", cod_ue: "2518", nome_escola: "EMEIF CAIUBURA", inep: "35427378", endereco: "Rua Um, Nº 520 E 523", cep: "11254200", telefone: "13 33194200", cod_sed: "427378", dir_email: "dir.caiubura@seducbertioga.com.br", assist_email: "assist.caiubura@seducbertioga.com.br", coord_email: "coord.caiubura@seducbertioga.com.br", sec_email: "sec.caiubura@seducbertioga.com.br" },
+        { cod_escola: "19", cod_ue: "2519", nome_escola: "EMIG NHEMBO E A PORÃ", inep: "35272322", endereco: "Av. Tupi Guarani,1500, Boraceia", cep: "11626315", telefone: "12 38676662", cod_sed: "272322", dir_email: "dir.nhembo@seducbertioga.com.br", assist_email: "assist.nhembo@seducbertioga.com.br", coord_email: "coord.nhembo@seducbertioga.com.br", sec_email: "sec.nhembo@seducbertioga.com.br" },
+        { cod_escola: "20", cod_ue: "2520", nome_escola: "NEIM Boracéia", inep: "35268768", endereco: "Av. Afio Pecoraro Júnior,S/N, Boracéia-Bertioga-Sp", cep: "11271245", telefone: "13 33122265", cod_sed: "268768", dir_email: "dir.neimboraceia1@seducbertioga.com.br", assist_email: "assist.neimboraceia1@seducbertioga.com.br", coord_email: "coord.neimboraceia1@seducbertioga.com.br", sec_email: "sec.neimboraceia1@seducbertioga.com.br" },
+        { cod_escola: "21", cod_ue: "2521", nome_escola: "NEIM Elizabeth Regina Aparecida Garcia", inep: "35235180", endereco: "Rua Manoel Gajo, 2650 - Parque Estoril", cep: "11250597", telefone: "13 33171213", cod_sed: "235180", dir_email: "dir.neimelizabeth@seducbertioga.com.br", assist_email: "assist.neimelizabeth@seducbertioga.com.br", coord_email: "coord.neimelizabethregina@seducbertioga.com.br", sec_email: "sec.neimelizabeth@seducbertioga.com.br" },
+        { cod_escola: "22", cod_ue: "2522", nome_escola: "NEIM Chácara Vista Linda", inep: "35196236", endereco: "Rua Lincoln Bolivar Neves, 930, Chácara Vista Linda", cep: "11259090", telefone: "13 33116061", cod_sed: "196236", dir_email: "dir.neimchacara@seducbertioga.com.br", assist_email: "assist.neimchacara@seducbertioga.com.br", coord_email: "coord.neimchacara@seducbertioga.com.br", sec_email: "sec.neimchacara@seducbertioga.com.br" },
+        { cod_escola: "23", cod_ue: "2523", nome_escola: "NEIM Emancipadora Profª Irene Vaz Pinto Lyra", inep: "35196241", endereco: "Rua Pedro Uzzo 875 - Jardim Raphael", cep: "11258015", telefone: "13 33116041", cod_sed: "196241", dir_email: "dir.neimirenevaz@seducbertioga.com.br", assist_email: "assist.neimirenevaz@seducbertioga.com.br", coord_email: "coord.neimirenevaz@seducbertioga.com.br", sec_email: "sec.neimirenevaz@seducbertioga.com.br" },
+        { cod_escola: "24", cod_ue: "2524", nome_escola: "NEIM Guaratuba", inep: "35456020", endereco: "Rua Aprovada 624 Quadra A - Nº 15 Costa Do Sol", cep: "11267474", telefone: "13 33127554", cod_sed: "456020", dir_email: "dir.neimguaratuba@seducbertioga.com.br", assist_email: "assist.neimguaratuba@seducbertioga.com.br", coord_email: "coord.neimguaratuba@seducbertioga.com.br", sec_email: "sec.neimguaratuba@seducbertioga.com.br" },
+        { cod_escola: "25", cod_ue: "2525", nome_escola: "NEIM Mangue Seco", inep: "35456032", endereco: "Rua Pastor Ronaldo Rodrigues Da Silva, 133 - Rio Da Praia", cep: "11256190", telefone: "13 33172997", cod_sed: "456032", dir_email: "dir.neimmangueseco@seducbertioga.com.br", assist_email: "assist.neimmangueseco@seducbertioga.com.br", coord_email: "coord.neimmangueseco@seducbertioga.com.br", sec_email: "sec.neimmangueseco@seducbertioga.com.br" },
+        { cod_escola: "26", cod_ue: "2526", nome_escola: "NEIM Oswaldo Justo", inep: "35565465", endereco: "Rua Engº E Arq. Eduardo Correia Da Costa Junior, 1.400", cep: "11258359", telefone: "13 33127724", cod_sed: "565465", dir_email: "dir.neimoswaldojusto@seducbertioga.com.br", assist_email: "assist.neimoswaldojusto@seducbertioga.com.br", coord_email: "coord.neimoswaldojusto@seducbertioga.com.br", sec_email: "sec.neimoswaldojusto@seducbertioga.com.br" },
+        { cod_escola: "27", cod_ue: "2527", nome_escola: "NEIM Prof Amilton José do Amparo", inep: "35004474", endereco: "Rua Luiz Pereira De Campos, 697 - Centro", cep: "11250117", telefone: "13 33171341", cod_sed: "004474", dir_email: "dir.amilton@seducbertioga.com.br", assist_email: "assist.neimamilton@seducbertioga.com.br", coord_email: "coord.neimamilton@seducbertioga.com.br", sec_email: "sec.amilton@seducbertioga.com.br" },
+        { cod_escola: "28", cod_ue: "2528", nome_escola: "NEIM PROFª Zilmar Moura dos Santos", inep: "35281273", endereco: "Rua Cardeal Emyle Biayenda, 248 - Jd. Rio Da Praia", cep: "11256070", telefone: "13 33173093", cod_sed: "281273", dir_email: "dir.neimzilmar@seducbertioga.com.br", assist_email: "assist.neimzilmar@seducbertioga.com.br", coord_email: "coord.neimzilmarmoura@seducbertioga.com.br", sec_email: "sec.neimzilmar@seducbertioga.com.br" },
+        { cod_escola: "29", cod_ue: "2529", nome_escola: "NEIM Teodoro Quirino", inep: "35268756", endereco: "Rua Victório Guidolim, S/N° - Jd Indaiá", cep: "11260594", telefone: "13 33133166", cod_sed: "268756", dir_email: "dir.neimteodoroquirino@seducbertioga.com.br", assist_email: "assist.neimteodoroquirino@seducbertioga.com.br", coord_email: "coord.neimteodoroquirino@seducbertioga.com.br", sec_email: "sec.neimteodoroquirino@seducbertioga.com.br" },
+        { cod_escola: "30", cod_ue: "2530", nome_escola: "TESTE", inep: "99999999", endereco: "Rua TESTE", cep: "11256000", telefone: "13 99999999", cod_sed: "999999", dir_email: "gerson.santiago@seducbertioga.com.br", assist_email: "aderson.barros@seducbertioga.com.br", coord_email: "lucas.teodoro@seducbertioga.com.br", sec_email: "t1@seducbertioga.com.br" },
+        { cod_escola: "31", cod_ue: "2531", nome_escola: "NEIM Boracéia II", inep: "35008817", endereco: "Rua Professor Geraldo Rodrigues Montemor, 647", cep: "11271165", telefone: "13 35001232", cod_sed: "008817", dir_email: "dir.neimboraceia2@seducbertioga.com.br", assist_email: "assist.neimboraceia2@seducbertioga.com.br", coord_email: "coord.neimboraceia2@seducbertioga.com.br", sec_email: "sec.neimboraceia2@seducbertioga.com.br" }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const schoolSelect = document.getElementById('escolaSelecionada');
+        
+        // Populate dropdown
+        schoolsData.forEach(school => {
+            const option = document.createElement('option');
+            option.value = school.inep;
+            option.textContent = school.nome_escola;
+            schoolSelect.appendChild(option);
+        });
+
+        // Add event listener to school selector
+        schoolSelect.addEventListener('change', (e) => {
+            const selectedIinep = e.target.value;
+            const selectedSchool = schoolsData.find(school => school.inep === selectedIinep);
+            
+            document.getElementById('nomeUE').value = selectedSchool ? selectedSchool.nome_escola : '';
+            document.getElementById('codigoCIE').value = selectedSchool ? selectedSchool.inep : '';
+            document.getElementById('enderecoCompleto').value = selectedSchool ? selectedSchool.endereco : '';
+            document.getElementById('telefone').value = selectedSchool ? selectedSchool.telefone : '';
+            document.getElementById('email').value = selectedSchool ? selectedSchool.dir_email : '';
+        });
+        
+        // Load draft on page load
+        carregarRascunho();
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollAtual = window.scrollY;
+            const progresso = (scrollAtual / scrollTotal) * 100;
+            document.getElementById('progressBar').style.width = progresso + '%';
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('docModal');
+        const span = document.getElementsByClassName("close-button")[0];
+        span.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        document.getElementById('copy-btn').addEventListener('click', () => {
+            const output = document.getElementById('doc-output');
+            output.select();
+            output.setSelectionRange(0, 99999);
+            try {
+                document.execCommand('copy');
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = 'Copiado!';
+                setTimeout(() => { btn.textContent = 'Copiar Texto'; }, 2000);
+            } catch (err) {
+                 alert('Não foi possível copiar o texto automaticamente.');
+            }
+        });
+    });
+
+    function salvarRascunho() {
+        const form = document.getElementById('pppForm');
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+        localStorage.setItem('formRascunho', JSON.stringify(data));
+        alert('Rascunho salvo com sucesso!');
+    }
+
+    function carregarRascunho() {
+        const savedData = localStorage.getItem('formRascunho');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            const form = document.getElementById('pppForm');
+            Object.keys(data).forEach(key => {
+                const element = form.elements[key];
+                if (element) {
+                    element.value = data[key];
+                    // Trigger change event for school selector to populate readonly fields
+                    if (key === 'escolaSelecionada') {
+                        element.dispatchEvent(new Event('change'));
+                    }
+                }
+            });
+             console.log('Rascunho carregado.');
+        }
+    }
+    
+    function visualizarFormulario() {
+        window.print();
+    }
+
+    function exportarParaGoogleDocs() {
+        let output = 'ADENDOS/2025 AO PLANO DE GESTÃO QUADRIENAL E PPP (2022/2025)\n';
+        output += '============================================================\n\n';
+
+        const form = document.getElementById('pppForm');
+        const sections = form.querySelectorAll('.section');
+
+        sections.forEach(section => {
+            const title = section.querySelector('.section-title').innerText;
+            output += `--- ${title} ---\n\n`;
+
+            const inputs = section.querySelectorAll('input, textarea, select');
+            inputs.forEach(item => {
+                let label = '';
+                if (item.id) {
+                    const labelElement = form.querySelector(`label[for='${item.id}']`);
+                    if(labelElement) {
+                       label = labelElement.innerText;
+                    }
+                }
+                
+                if (label && item.value) {
+                    output += `${label}\n`;
+                    if (item.tagName === 'SELECT') {
+                         output += `${item.options[item.selectedIndex].text}\n\n`;
+                    } else {
+                         output += `${item.value}\n\n`;
+                    }
+                }
+            });
+        });
+
+        document.getElementById('doc-output').value = output;
+        document.getElementById('docModal').style.display = 'block';
+    }
+
+    </script>
+</body>
+</html>
+
